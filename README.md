@@ -10,10 +10,7 @@ IEEE RA-L 2026 논문 "Semantic-GSL: Vision-Language Semantics for Information-T
 4. 1~2분 뒤 `https://<GitHub ID>.github.io/Semantic-GSL/` 에서 확인
 
 ## 배포 전 바꿀 것
-- `index.html`의 `SITE_URL` 3곳 → 실제 주소 (예: `https://<GitHub ID>.github.io/Semantic-GSL`). 링크 공유 시 미리보기 이미지에 쓰임
-- Paper 버튼: IEEE Xplore 링크가 나오면 `href` 넣고 `is-pending` 클래스와 `aria-disabled` 삭제
 - Code 버튼: 코드 공개 시 주석 해제
-- BibTeX: 권호·페이지·DOI 확정 후 추가
 
 ## 구조
 - `index.html` 페이지 본문
