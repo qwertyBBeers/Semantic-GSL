@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <!-- Primary Meta Tags -->
+  <title>Semantic-GSL: Vision-Language Semantics for Information-Theoretic Gas Source Localization</title>
+  <meta name="title" content="Semantic-GSL: Vision-Language Semantics for Information-Theoretic Gas Source Localization">
+  <meta name="description" content="Semantic-GSL fuses open-set vision-language semantics with gas measurements in a semantic-informed particle filter for efficient gas source localization in unknown indoor environments. IEEE RA-L 2026.">
+  <meta name="keywords" content="gas source localization, vision-language model, Grounding DINO, CLIP, particle filter, information-theoretic search, mobile robot, semantic scene understanding, active sensing">
+  <meta name="author" content="Hyoungho Park, Hongro Jang, Seunghwan Kim, Junhee Lee, Jiwoo Kim, Hyondong Oh">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="KAIST Mechanical Engineering">
+  <meta property="og:title" content="Semantic-GSL: Vision-Language Semantics for Information-Theoretic Gas Source Localization">
+  <meta property="og:description" content="Open-set vision-language semantics + gas measurements in a semantic-informed particle filter for indoor gas source localization. IEEE RA-L 2026.">
+  <meta property="og:url" content="https://qwertybbeers.github.io/Semantic-GSL/">
+  <meta property="og:image" content="https://qwertybbeers.github.io/Semantic-GSL/static/images/social_preview.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Real-world run of Semantic-GSL locating a gas cylinder in an indoor corridor">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Semantic-GSL: Vision-Language Semantics for Information-Theoretic Gas Source Localization">
+  <meta name="twitter:description" content="Open-set vision-language semantics + gas measurements in a semantic-informed particle filter for indoor gas source localization. IEEE RA-L 2026.">
+  <meta name="twitter:image" content="https://qwertybbeers.github.io/Semantic-GSL/static/images/social_preview.jpg">
+
+  <!-- Google Scholar -->
+  <meta name="citation_title" content="Semantic-GSL: Vision-Language Semantics for Information-Theoretic Gas Source Localization">
+  <meta name="citation_author" content="Park, Hyoungho">
+  <meta name="citation_author" content="Jang, Hongro">
+  <meta name="citation_author" content="Kim, Seunghwan">
+  <meta name="citation_author" content="Lee, Junhee">
+  <meta name="citation_author" content="Kim, Jiwoo">
+  <meta name="citation_author" content="Oh, Hyondong">
+  <meta name="citation_publication_date" content="2026">
+  <meta name="citation_journal_title" content="IEEE Robotics and Automation Letters">
+
+  <meta name="theme-color" content="#155e75">
+
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link rel="apple-touch-icon" href="static/images/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  <link rel="stylesheet" href="static/css/semantic-gsl.css">
+
+  <!-- Math rendering -->
+  <script>
+    window.MathJax = { tex: { inlineMath: [['\\(', '\\)']] }, svg: { fontCache: 'global' } };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "Semantic-GSL: Vision-Language Semantics for Information-Theoretic Gas Source Localization",
+    "author": [
+      {"@type": "Person", "name": "Hyoungho Park", "affiliation": {"@type": "Organization", "name": "KAIST"}},
+      {"@type": "Person", "name": "Hongro Jang", "affiliation": {"@type": "Organization", "name": "KAIST"}},
+      {"@type": "Person", "name": "Seunghwan Kim", "affiliation": {"@type": "Organization", "name": "UNIST"}},
+      {"@type": "Person", "name": "Junhee Lee", "affiliation": {"@type": "Organization", "name": "KAIST"}},
+      {"@type": "Person", "name": "Jiwoo Kim", "affiliation": {"@type": "Organization", "name": "KAIST"}},
+      {"@type": "Person", "name": "Hyondong Oh", "affiliation": {"@type": "Organization", "name": "KAIST"}}
+    ],
+    "datePublished": "2026",
+    "publisher": {"@type": "Organization", "name": "IEEE Robotics and Automation Letters"},
+    "keywords": ["gas source localization", "vision-language model", "particle filter", "information-theoretic search", "mobile robot"]
+  }
+  </script>
+</head>
+<body>
+
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <main id="main-content">
+
+  <!-- ========== Title ========== -->
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">Semantic-GSL: Vision-Language Semantics for Information-Theoretic Gas Source Localization</h1>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">Hyoungho Park<sup>1*</sup>,</span>
+              <span class="author-block">Hongro Jang<sup>1*</sup>,</span>
+              <span class="author-block">Seunghwan Kim<sup>2</sup>,</span>
+              <span class="author-block">Junhee Lee<sup>1</sup>,</span>
+              <span class="author-block">Jiwoo Kim<sup>1</sup>,</span>
+              <span class="author-block">Hyondong Oh<sup>1</sup></span>
+            </div>
+
+            <div class="is-size-6 publication-affiliations">
+              <span class="author-block"><sup>1</sup>KAIST</span>
+              <span class="author-block"><sup>2</sup>UNIST</span>
+              <span class="eql-cntrb"><br><sup>*</sup>Equal contribution</span>
+            </div>
+
+            <div class="publication-venue">IEEE Robotics and Automation Letters (RA-L), 2026</div>
+
+            <div class="publication-links">
+              <!-- TODO: IEEE Xplore 링크가 나오면 href 넣고 is-pending 클래스와 aria-disabled 삭제 -->
+              <span class="link-block">
+                <a href="#" class="external-link button is-normal is-rounded is-dark is-pending" aria-disabled="true" title="Available soon">
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://youtu.be/UN_C6_OI15k" target="_blank" rel="noopener" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-youtube"></i></span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- TODO: 코드 공개 시 주석 해제
+              <span class="link-block">
+                <a href="https://github.com/YOUR_GITHUB_ID/Semantic-GSL" target="_blank" rel="noopener" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-github"></i></span>
+                  <span>Code</span>
+                </a>
+              </span>
+              -->
+              <span class="link-block">
+                <a href="#BibTeX" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-quote-right"></i></span>
+                  <span>BibTeX</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Teaser ========== -->
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <figure class="paper-figure">
+          <img src="static/images/teaser_real_world_run.jpg" width="1800" height="1230"
+               alt="Three snapshots of a real-world run: uniform particles at k=1, particles pulled toward detected gas-related objects at k=31, and the posterior converged on the true gas cylinder at k=62.">
+          <figcaption>
+            A real-world run of Semantic-GSL. <b>(a)</b> Particles start uniformly spread over the unknown map.
+            <b>(b)</b> Gas-related objects found by the two-stage VLM pull particles toward them, and low gas readings at false candidates suppress those particles.
+            <b>(c)</b> The posterior converges on the true gas cylinder at the end of the corridor.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Abstract ========== -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              This study presents Semantic-GSL, a semantic-informed vision-integrated framework for gas source localization (GSL) in unknown indoor environments.
+              Indoor GSL is challenging because gas concentration measurements are sparse and noisy, while airflow often deviates from simplified dispersion models.
+              Existing vision-integrated approaches rely on predefined object categories or large multimodal models that are impractical for on-board deployment.
+              To address these limitations, we employ a lightweight two-stage vision-language model framework combining Grounding DINO and CLIP for open-set detection of gas-related objects using general environmental descriptions.
+              The extracted semantic information is probabilistically incorporated into posterior estimation through the proposed semantic-informed particle filter, yielding a semantically informative posterior that enables efficient information-theoretic source search.
+              Simulations demonstrate enhanced search efficiency and robust localization across diverse environments, while real-world experiments confirm the feasibility of on-board deployment.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Video ========== -->
+  <section class="hero is-small">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3 has-text-centered">Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube-nocookie.com/embed/UN_C6_OI15k" title="Semantic-GSL supplementary video"
+                  frameborder="0" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Method ========== -->
+  <section class="section hero is-light" id="method">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Method</h2>
+
+      <figure class="paper-figure is-wide">
+        <img src="static/images/framework_overview.jpg" width="2200" height="897" loading="lazy"
+             alt="Overview diagram: camera images and the text prompt go through Grounding DINO and CLIP filtering; the resulting object candidates guide particle propagation in the semantic-informed particle filter, and gas measurements update particle weights before the dual-mode planner chooses the next move.">
+        <figcaption>
+          Overview. The two-stage VLM framework <b>(a)</b> turns camera images into a short list of gas-related object candidates.
+          The semantic-informed particle filter <b>(b)</b> uses them to guide particle propagation, then reweights particles with the gas measurement.
+          A dual-mode information-theoretic planner picks the next sampling location.
+        </figcaption>
+      </figure>
+
+      <div class="method-block">
+        <h3 class="title is-4">Two-stage VLM framework</h3>
+        <div class="content">
+          <p>
+            Gas-related object categories cannot be listed in advance in an unknown building, so the robot searches with one general description:
+            <span class="prompt">“objects that can contain or leak gas”</span>.
+            Grounding DINO struggles with this kind of descriptive prompt, so it is used only as a high-recall first stage with a low box threshold
+            (\(\tau_b = 0.15\)). CLIP then re-scores every cropped candidate against the same text and keeps those with similarity above
+            \(\tau_s = 0.6\). Each kept box is projected to a map position with depth, giving a semantic observation
+            \(\mathbf{S}_{k,j} = [\mathbf{p}_{k,j}^\top \; s_{k,j}]^\top\) of position and similarity score.
+          </p>
+        </div>
+
+        <p class="table-caption">Candidate quality on 317 real-world images (gas cylinders, solvent containers, and fire extinguishers as ground truth).</p>
+
+        <div class="table-container compact-table">
+          <table class="table is-fullwidth">
+            <thead>
+              <tr><th>Method</th><th>Cand./img</th><th>Precision</th><th>Recall</th><th>F1-score</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Grounding DINO only (OGD)</td><td>5.50</td><td>0.24</td><td><b>0.87</b></td><td>0.37</td></tr>
+              <tr class="is-ours"><td>Two-stage VLM (Ours)</td><td><b>3.28</b></td><td><b>0.34</b></td><td>0.75</td><td><b>0.47</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="method-block">
+        <h3 class="title is-4">Semantic-informed particle filter (SIPF)</h3>
+        <div class="content">
+          <p>
+            A detected object says nothing physical about the gas, so SIPF does not treat semantics as a likelihood.
+            Instead, semantics enter the <em>transition model</em> as contextual guidance over where the source could be,
+            while the gas measurement alone sets the particle weights:
+          </p>
+          <div class="equation">
+            \[ p(\boldsymbol{\theta}_k \mid z_{1:k-1}, \mathcal{S}_{1:k}) = \int p(\boldsymbol{\theta}_k \mid \boldsymbol{\theta}_{k-1}, \mathcal{S}_k)\, p(\boldsymbol{\theta}_{k-1} \mid z_{1:k-1}, \mathcal{S}_{1:k-1})\, d\boldsymbol{\theta}_{k-1} \]
+          </div>
+          <p>Each particle is propagated with a three-step hierarchical sampling procedure:</p>
+          <ol class="step-list">
+            <li>
+              <b>Pick an object.</b> Sample a candidate index in proportion to its CLIP score,
+              \(P(j \mid \mathcal{S}_k) = s_{k,j} / \sum_{l} s_{k,l}\).
+            </li>
+            <li>
+              <b>Propose a source location near it.</b>
+              \(\tilde{\mathbf{r}}^n_{s,k} \sim \mathcal{N}(\mathbf{p}_{k,j^n}, \sigma_q^2 \mathbf{I})\), keeping the release rate and spread unchanged.
+            </li>
+            <li>
+              <b>Limit the jump.</b> Accept with probability
+              \(\min\{1, \exp(-\lVert \tilde{\mathbf{r}}^n_{s,k} - \mathbf{r}^n_{s,k-1} \rVert^2 / 2\sigma_p^2)\}\)
+              and cap the move at \(d_m\), so particles do not all collapse onto one object.
+            </li>
+          </ol>
+          <p>
+            The gas measurement then reweights every particle, \(\bar{w}^n_k = p(z_k \mid \boldsymbol{\theta}^n_k)\, w^n_{k-1}\).
+            Particles drawn to a non-source object lose weight once the robot measures low concentration there, and particles near the true source gain it.
+            Because particles gather around plausible objects, measuring there is expected to resolve the most uncertainty,
+            so the dual-mode planner, which maximizes expected information gain, naturally visits those regions first.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Simulation ========== -->
+  <section class="section" id="simulation">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Simulation</h2>
+      <div class="content">
+        <p>
+          Gas dispersion is simulated with GADEN in Gazebo, using ethanol as the invisible gas and a Clearpath Jackal with a VLP-16 LiDAR, a camera, and a PID sensor.
+          Four layouts are tested: a simple indoor space (A), two residences (B, C), and a factory (D).
+          Each runs with no wind, which matches the dispersion model, and with 0.5 m/s wind, which breaks it.
+          Every condition has 100 runs from five start points, and a run succeeds when the final estimate is within 5 m of the source.
+        </p>
+      </div>
+    </div>
+
+    <div class="container wide-container">
+      <figure class="paper-figure">
+        <img src="static/images/simulation_envs.jpg" width="2600" height="763" loading="lazy"
+             alt="Four simulated environments A to D, each shown with gas dispersion under no wind (top row) and 0.5 m/s wind (bottom row).">
+        <figcaption>Environments A–D. Top row: no wind. Bottom row: 0.5 m/s wind, where the real plume no longer follows the dispersion model.</figcaption>
+      </figure>
+    </div>
+
+    <div class="container is-max-desktop">
+      <figure class="paper-figure">
+        <img src="static/images/sim_illustrative_runs.jpg" width="1600" height="1171" loading="lazy"
+             alt="Paths of the dual-mode planner, hybrid planner, and Semantic-GSL in environment C, with Semantic-GSL taking the shortest path to the source.">
+        <figcaption>
+          Example runs in Env C without wind. The dual-mode planner (a) and hybrid planner (b) wander through rooms full of irrelevant objects and stop at <i>k</i> = 56 and 47.
+          Semantic-GSL (c) skips those rooms and localizes the source at <i>k</i> = 29. Full paths are compared in (d).
+        </figcaption>
+      </figure>
+
+      <h3 class="title is-4 results-heading">Results</h3>
+      <div class="result-controls" role="group" aria-label="Choose environment and wind speed">
+        <div class="segmented" role="tablist" aria-label="Environment">
+          <button type="button" role="tab" class="seg-btn is-active" data-env="A" aria-selected="true">Env A</button>
+          <button type="button" role="tab" class="seg-btn" data-env="B" aria-selected="false">Env B</button>
+          <button type="button" role="tab" class="seg-btn" data-env="C" aria-selected="false">Env C</button>
+          <button type="button" role="tab" class="seg-btn" data-env="D" aria-selected="false">Env D</button>
+        </div>
+        <div class="segmented" role="tablist" aria-label="Wind speed">
+          <button type="button" role="tab" class="seg-btn is-active" data-wind="0.0" aria-selected="true">Wind 0.0 m/s</button>
+          <button type="button" role="tab" class="seg-btn" data-wind="0.5" aria-selected="false">Wind 0.5 m/s</button>
+        </div>
+      </div>
+
+      <p class="table-caption" id="sim-caption">Env A, wind 0.0 m/s. SR over 100 runs; other metrics are mean (std) over successful runs. Best value in bold.</p>
+
+      <div class="table-container">
+        <table class="table is-fullwidth results-table" id="sim-table">
+          <thead>
+            <tr>
+              <th>Method</th><th class="col-sensor">Sensor</th><th class="sr-col">Success rate</th>
+              <th>Steps</th><th>Error [m]</th><th>Travel time [s]</th>
+            </tr>
+          </thead>
+          <tbody id="sim-tbody">
+            <!-- index.js 가 채움 -->
+          </tbody>
+        </table>
+        <noscript><p>Enable JavaScript to view the interactive results table, or see Table III of the paper.</p></noscript>
+      </div>
+      <p class="table-note">
+        The hybrid planner follows the gas-only planner and switches to the most relevant detected object once concentration exceeds 1,000 ppm.
+        Semantic-GSL (OGD) uses SIPF with Grounding DINO candidates only, without CLIP filtering.
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== Real-world ========== -->
+  <section class="section hero is-light" id="real-world">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Real-world experiment</h2>
+
+      <figure class="paper-figure">
+        <img src="static/images/real_world_setup.jpg" width="1800" height="875" loading="lazy"
+             alt="Floor map of the 26 by 15 meter test area with the source and start positions, and the AgileX Limo robot with Livox Mid-360 LiDAR, RealSense D435i camera, SEN15112 gas sensor, and Jetson AGX Orin.">
+        <figcaption>Test area (26 m × 15 m) and the robot. CO<sub>2</sub> is released from a gas cylinder among other gas-related objects.</figcaption>
+      </figure>
+
+      <div class="content">
+        <p>
+          An AgileX Limo carries a Livox Mid-360 LiDAR, an Intel RealSense D435i, and an SEN15112 gas sensor, with everything computed on a Jetson AGX Orin.
+          FAST-LIO2 provides odometry and the occupancy map. The two-stage VLM runs in parallel with gas sampling at about 1.6 Hz
+          (Grounding DINO 560 ms, CLIP 86 ms). Each method was run 10 times after 5 minutes of release.
+        </p>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat"><span class="stat-value">100%</span><span class="stat-label">success rate, 10 of 10 runs</span></div>
+        <div class="stat"><span class="stat-value">0.64 m</span><span class="stat-label">mean localization error, vs. 3.12 m and 4.70 m for the baselines</span></div>
+        <div class="stat"><span class="stat-value">1.6 Hz</span><span class="stat-label">open-set detection running on-board</span></div>
+      </div>
+
+      <p class="table-caption">Real-world results over 10 runs.</p>
+
+      <div class="table-container">
+        <table class="table is-fullwidth results-table">
+          <thead>
+            <tr><th>Method</th><th>Success rate</th><th>Steps</th><th>Error [m]</th><th>Travel time [s]</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Dual-mode planner</td><td>80%</td><td>81.25</td><td>4.70</td><td>839.29</td></tr>
+            <tr><td>Hybrid planner</td><td>90%</td><td>79.00</td><td>3.12</td><td>799.08</td></tr>
+            <tr class="is-ours"><td>Semantic-GSL (Ours)</td><td><b>100%</b></td><td><b>70.20</b></td><td><b>0.64</b></td><td><b>743.56</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== BibTeX ========== -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <div class="bibtex-header">
+        <h2 class="title">BibTeX</h2>
+        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+          <i class="fas fa-copy"></i>
+          <span class="copy-text">Copy</span>
+        </button>
+      </div>
+      <!-- TODO: 권호·페이지·DOI 확정되면 volume/number/pages/doi 추가 -->
+      <pre id="bibtex-code"><code>@article{park2026semanticgsl,
+  title   = {Semantic-{GSL}: Vision-Language Semantics for Information-Theoretic Gas Source Localization},
+  author  = {Park, Hyoungho and Jang, Hongro and Kim, Seunghwan and Lee, Junhee and Kim, Jiwoo and Oh, Hyondong},
+  journal = {IEEE Robotics and Automation Letters},
+  year    = {2026}
+}</code></pre>
+    </div>
+  </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank" rel="noopener">Academic Project Page Template</a>,
+              which was adopted from the <a href="https://nerfies.github.io" target="_blank" rel="noopener">Nerfies</a> project page.
+              This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

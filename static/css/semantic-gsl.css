@@ -1,0 +1,152 @@
+/* Semantic-GSL overrides on top of the Academic Project Page Template (index.css).
+   Palette is taken from the paper's own figures: deep teal map ink, gas-plume red. */
+:root {
+  --primary-color: #155e75;
+  --primary-hover: #0e4a5c;
+  --accent-color: #c2410c;
+  --plume: #d64534;
+  --text-primary: #1b2a33;
+  --text-secondary: #4b5a63;
+  --text-light: #7b8a92;
+  --background-secondary: #f4f7f8;
+  --background-accent: #eaf0f2;
+  --border-color: #dbe4e8;
+  --gradient-accent: linear-gradient(90deg, var(--plume), var(--plume));
+}
+
+/* One quiet page: no per-section entrance animation, no hover lift on figures */
+.hero, .section { animation: none; }
+.publication-video:hover { transform: none; }
+
+.publication-title { font-size: clamp(1.9rem, 4.2vw, 3rem) !important; letter-spacing: -0.01em; }
+.publication-authors { margin-bottom: 0.5rem !important; }
+.publication-affiliations { color: var(--text-secondary); margin-bottom: 1.25rem; }
+.publication-affiliations .author-block { margin-right: 1rem; }
+.publication-venue { margin: 0 0 1.25rem; }
+.publication-links { margin-top: 0.25rem; }
+
+.button.is-pending { opacity: 0.45; pointer-events: none; }
+
+/* Figures */
+.paper-figure { margin: 0 0 2.5rem; }
+.paper-figure img {
+  display: block; width: 100%; height: auto;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background: #fff;
+}
+.paper-figure figcaption {
+  margin: 0.9rem auto 0;
+  max-width: 46rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  text-align: left;
+}
+.wide-container { max-width: 1280px; padding: 0 1.5rem; margin-bottom: 0.5rem; }
+.wide-container .paper-figure figcaption { max-width: 46rem; }
+
+/* Body text width */
+#main-content .content p,
+.step-list { max-width: 46rem; }
+#method .content, #simulation .content, #real-world .content { margin-left: auto; margin-right: auto; max-width: 46rem; }
+#main-content .content p { color: var(--text-secondary); line-height: 1.75; }
+
+/* Method */
+.method-block { margin-top: 3rem; }
+.method-block .title.is-4 { color: var(--text-primary); margin-bottom: 1rem; max-width: 46rem; margin-left: auto; margin-right: auto; }
+.prompt {
+  font-weight: 600; color: var(--text-primary);
+  background: #fff; border: 1px solid var(--border-color);
+  padding: 0.05rem 0.45rem; border-radius: 6px; white-space: nowrap;
+}
+.equation {
+  overflow-x: auto; margin: 1.25rem 0 1.5rem;
+  padding: 0.75rem 0.5rem;
+  background: #fff; border: 1px solid var(--border-color); border-radius: 10px;
+}
+.step-list { margin: 0.5rem 0 1.5rem 1.25rem !important; }
+.step-list li { margin-bottom: 0.6rem; color: var(--text-secondary); line-height: 1.7; }
+.step-list li::marker { color: var(--primary-color); font-weight: 700; }
+.step-list b, .content p b { color: var(--text-primary); }
+
+/* Tables */
+.table-container { margin: 1.5rem auto 0; max-width: 46rem; }
+.table { background: transparent; font-variant-numeric: tabular-nums; font-size: 0.95rem; }
+.table caption { caption-side: top; text-align: left; color: var(--text-secondary); font-size: 0.875rem; padding-bottom: 0.6rem; }
+.table thead th { color: var(--text-primary); font-weight: 600; border-bottom: 2px solid var(--text-primary); white-space: nowrap; }
+.table td, .table th { border-color: var(--border-color); vertical-align: middle; }
+.table tr.is-ours td { background: rgba(21, 94, 117, 0.07); color: var(--text-primary); }
+.table tr.is-ours td:first-child { font-weight: 600; }
+.table td b { color: var(--text-primary); }
+.compact-table .table { background: #fff; border-radius: 10px; }
+.std { color: var(--text-light); font-size: 0.85em; margin-left: 0.15rem; }
+
+.results-heading { text-align: center; margin-top: 1rem; }
+.result-controls { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+.segmented {
+  display: inline-flex; padding: 3px; gap: 2px;
+  background: var(--background-accent); border-radius: 10px;
+}
+.seg-btn {
+  border: 0; background: transparent; cursor: pointer;
+  font: 600 0.9rem/1 'Inter', sans-serif; color: var(--text-secondary);
+  padding: 0.6rem 0.9rem; border-radius: 8px;
+}
+.seg-btn:hover { color: var(--text-primary); }
+.seg-btn.is-active { background: #fff; color: var(--primary-color); box-shadow: 0 1px 2px rgb(0 0 0 / 0.08); }
+.seg-btn:focus-visible { outline: 2px solid var(--primary-color); outline-offset: 2px; }
+
+.results-table .sr-col { min-width: 9.5rem; }
+.sr-cell { display: flex; align-items: center; gap: 0.6rem; }
+.sr-bar { flex: 1; height: 8px; background: var(--background-accent); border-radius: 4px; overflow: hidden; min-width: 3rem; }
+.sr-bar span { display: block; height: 100%; background: #9fb6be; border-radius: 4px; transition: width 0.35s ease; }
+tr.is-ours .sr-bar span { background: var(--primary-color); }
+.sr-num { min-width: 2.6rem; text-align: right; }
+.table-note { max-width: 46rem; margin: 0.75rem auto 0; font-size: 0.875rem; color: var(--text-light); line-height: 1.6; }
+
+/* Real-world stats */
+.stat-row {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+  max-width: 46rem; margin: 2rem auto 0;
+  background: var(--border-color); border: 1px solid var(--border-color); border-radius: 10px; overflow: hidden;
+}
+.stat { background: #fff; padding: 1.1rem 1.2rem; display: flex; flex-direction: column; gap: 0.3rem; }
+.stat-value { font-size: 1.75rem; font-weight: 800; color: var(--primary-color); line-height: 1.1; letter-spacing: -0.01em; }
+.stat-label { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.45; }
+
+/* Section rhythm */
+.title.is-3 { margin-bottom: 2.25rem !important; }
+#BibTeX pre { white-space: pre; }
+
+@media screen and (max-width: 768px) {
+  .stat-row { grid-template-columns: 1fr; }
+  .seg-btn { padding: 0.55rem 0.7rem; font-size: 0.85rem; }
+  .paper-figure figcaption { font-size: 0.9rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .sr-bar span { transition: none; }
+}
+
+/* Fixes after visual review */
+.title.is-3, .hero.is-light .title { color: var(--text-primary) !important; }
+#simulation .content { margin-bottom: 2rem; }
+#simulation .table-container { max-width: 58rem; }
+.results-table td, .results-table th { white-space: nowrap; }
+
+@media screen and (max-width: 480px) {
+  .publication-links .link-block { display: inline-block; margin-bottom: 0; }
+  .publication-links .button { width: auto; }
+  .publication-venue { font-size: 0.85rem; padding: 0.45rem 0.8rem; }
+  .content.has-text-justified { text-align: left !important; font-size: 1rem; }
+}
+
+/* Bulma .hero is a flex column: let containers shrink so wide tables/equations scroll inside instead of widening the page */
+.hero > .container, .hero-body > .container { min-width: 0; width: 100%; }
+.prompt { white-space: normal; }
+.table-caption { max-width: 46rem; margin: 1.5rem auto 0; font-size: 0.875rem; color: var(--text-secondary); line-height: 1.55; }
+#simulation .table-caption { max-width: 58rem; }
+.table-caption + .table-container { margin-top: 0.6rem; }
+@media screen and (max-width: 600px) { .col-sensor { display: none; } }
